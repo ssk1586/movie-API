@@ -1,10 +1,12 @@
 import React from 'react'
-import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { AiFillHeart } from "react-icons/ai";
+
+
 
 function RemoveFavouriteSpan() {
     return (
         <>
-			<IoIosRemoveCircleOutline size={20} style={ {color: 'red' }}/>
+			<AiFillHeart size={20} style={ {color: 'red' }}/>
 		</>
     )
 }

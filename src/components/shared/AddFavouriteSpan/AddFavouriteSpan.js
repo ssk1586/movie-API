@@ -1,10 +1,12 @@
 import React from 'react'
-import { AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
+
+
 
 function AddFavouriteSpan() {
     return (
         <>
-            <AiFillHeart size={20} style={ {color: 'red' }}/>
+            <AiOutlineHeart size={20} style={ {color: 'red' }}/>
 		</>
     )
 }
