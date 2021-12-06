@@ -6,7 +6,6 @@ const initialState = {
     AllMovies: [],
     favouriteMovies: [],
     genres: [],
-    selected: []
 }
 
 // export const fetchAsyncShowGenre = createAsyncThunk(
@@ -26,17 +25,19 @@ const initialState = {
 //     "movies/getMoviesWithGenres",
 //     async (page, {getState}) => {
 //         try {
-//             const movies = await fetchMovies(page);
+//             const movies = await fetchMovies(page).then(data => data.results);
 //             const { genres } = getState().movies
 
-//             movies.map(item => console.log(item.genre_ids) )
-//             // movies.map(item => item.genre_ids.map(id => {
-//             //     console.log(1)
-//             //     if (genres.id == id) {
-//             //         return genres.name
-//             //     }
-//             //     return 0;
-//             // }))
+//             // genres.map(item => console.log(item.name))
+            
+//             movies.map(item => item.genre_ids.map(id => {
+//                 if (id == genres.id) {
+
+//                     return 
+//                 }
+//                 return 0;
+//             }))
+//             console.log(movies)
 //         } catch (error) {
 //             console.log('error')
 //         };
@@ -56,8 +57,8 @@ const movieSlice = createSlice({
             }
         },
         deleteFavouriteMovie: (state, { payload }) => { state.favouriteMovies =  state.favouriteMovies.filter((movie) => movie.id !== payload.id) },
-        selectedMovie: (state, { payload }) => { state.selected = payload },
     },
+
     // extraReducers: (builder) => {
     //     builder.addCase(fetchAsyncShowGenre.fulfilled, (state, action) => {
     //         state.genres = action.payload
@@ -66,9 +67,8 @@ const movieSlice = createSlice({
 });
 
 
-export const { addMovie, addFavouriteMovie, deleteFavouriteMovie, loadMore, selectedMovie } = movieSlice.actions;
+export const { addMovie, addFavouriteMovie, deleteFavouriteMovie, loadMore } = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.AllMovies
-export const getAllFavourites = (state) => state.movies.favouriteMovies
 export const getFevouriteMovies = (state) => state.movies.favouriteMovies
 export default movieSlice.reducer;
 

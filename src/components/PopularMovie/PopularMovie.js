@@ -6,7 +6,7 @@ import { fetchMovies } from '../../services/movieApi';
 import CustomButton from '../shared/Button/Button';
 import AddFavouriteSpan from '../shared/AddFavouriteSpan/AddFavouriteSpan';
 
-import { loadMore, getAllMovies, addFavouriteMovie, addMovie } from '../../redux/slices/favouriteMovies';
+import { loadMore, getAllMovies, addFavouriteMovie, addMovie, fetchAsyncShowGenre, getMoviesWithGenres } from '../../redux/slices/favouriteMovies';
 
 import {
     ComponentWrapper,
