@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serializeMovies } from "../../helpers/movies";
-import { fetchMovies, fetchGenreMovieList, fetchSearchMovie  } from '../../services/movieApi';
+import { fetchMovies, fetchGenreMovieList, fetchSearchMovie, fetchMovieRecommendation  } from '../../services/movieApi';
 import { serializeGenres } from '../../helpers/genres'
 
 
 const initialState = {
     AllMovies: [],
     favouriteMovies: [],
+    recomMovies: [],
     genres: [],
     page: 1,
 }
@@ -70,7 +71,20 @@ export const searchMovies = createAsyncThunk(
             console.log('error')
         };
     }
+)
 
+export const recommendation = createAsyncThunk(
+    "movies/recommendation",
+    async (id, { getState }) => {
+        const { genres } = getState().movies;
+        try {
+            const movies = await fetchMovieRecommendation(id);
+            return serializeMovies(genres, movies.results)
+        }
+        catch (error) {
+            console.log('error')
+        };
+    }
 )
 
 const movieSlice = createSlice({
@@ -105,32 +119,6 @@ const movieSlice = createSlice({
             })
             state.favouriteMovies = state.favouriteMovies.filter((movie) => movie.id !== payload.id)
         },
-
-        // toggleFavouriteMovie: (state, { payload }) => {
-        //     if (!state.favouriteMovies.find(item => item.id === payload.id)) {
-        //         state.AllMovies = state.AllMovies.map(movie => {
-        //             if (movie.id === payload.id) {
-        //                 return {
-        //                     ...movie,
-        //                     isLiked: true,
-        //                 }
-        //             }
-        //             else return movie
-        //         })
-        //         state.favouriteMovies.push(payload)
-        //     } else {
-        //         state.AllMovies = state.AllMovies.map(movie => {
-        //             if (movie.id === payload.id) {
-        //                 return {
-        //                     ...movie,
-        //                     isLiked: false,
-        //                 }
-        //             }
-        //             else return movie
-        //         })
-        //         state.favouriteMovies = state.favouriteMovies.filter((movie) => movie.id !== payload.id)
-        //     }
-        // },
     },
 
     extraReducers: (builder) => {
@@ -146,6 +134,9 @@ const movieSlice = createSlice({
         builder.addCase(searchMovies.fulfilled, (state, action) => {
             state.AllMovies = action.payload
         })
+        builder.addCase(recommendation.fulfilled, (state, action) => {
+            state.recomMovies = action.payload
+        })
     },
 });
 
@@ -153,5 +144,6 @@ const movieSlice = createSlice({
 export const { addFavouriteMovie, deleteFavouriteMovie, increasePage, addMovie, resetPagination } = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.AllMovies
 export const getFavouriteMovies = (state) => state.movies.favouriteMovies
+export const getRecomMovies = (state) => state.movies.recomMovies
 export default movieSlice.reducer;
 

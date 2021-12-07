@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchMovieInformation, fetchMovieRecommendation } from '../../services/movieApi';
-import { addFavouriteMovie, toggleFavouriteMovie } from '../../redux/slices/favouriteMovies'
+import { fetchMovieInformation } from '../../services/movieApi';
+import { addFavouriteMovie, recommendation, getRecomMovies } from '../../redux/slices/favouriteMovies'
 
 import { MovieItem } from '../MovieItem/MovieItem';
 import { InfoMovieItem } from '../InfoMovieItem/InfoMovieItem';
@@ -15,22 +15,21 @@ import { Title } from '../PopularMovie/PopularMovie.styled'
 
 function InfoMovie() {
     const [selectedMovie, setSelectedMovie] = useState({})
-    const [recomMovie, setRecomMovie] = useState([]);
+    const recomM = useSelector(getRecomMovies)
 
     const dispatch = useDispatch();
-    const params = useParams();
+    const params = useParams(getRecomMovies);
 
     useEffect(() => {
         fetchMovieInformation(params.id)
             .then(data => setSelectedMovie(data))
-        fetchMovieRecommendation(params.id)
-            .then(data => setRecomMovie(data.results.splice(1, 20)))
+        dispatch(recommendation(params.id))
     }, [params.id])
 
     const save = (movie) => {
-        // dispatch(toggleFavouriteMovie(movie))
         dispatch(addFavouriteMovie(movie))
     }
+
 
     return (
         <ContentWrapper>
@@ -42,7 +41,7 @@ function InfoMovie() {
             <RecomMovieWrapper>
                 <Title>RECOMMENDATION</Title>
                 <MovieItem
-                    movies={recomMovie}
+                    movies={recomM}
                     handleFavouritesClick={save}
                     favouriteComponent={AddFavouriteSpan}
                 />

@@ -6,7 +6,14 @@ import { MovieItem } from '../MovieItem/MovieItem';
 import CustomButton from '../shared/Button/Button';
 import AddFavouriteSpan from '../shared/AddFavouriteSpan/AddFavouriteSpan';
 
-import { getAllMovies, fetchAllMovies, fetchAllGenres, moviesLoadMore, resetPagination, addFavouriteMovie } from '../../redux/slices/favouriteMovies';
+import {
+    getAllMovies,
+    fetchAllMovies,
+    fetchAllGenres,
+    moviesLoadMore,
+    resetPagination,
+    addFavouriteMovie
+} from '../../redux/slices/favouriteMovies';
 
 import {
     ComponentWrapper,

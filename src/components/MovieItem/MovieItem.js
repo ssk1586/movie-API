@@ -35,7 +35,7 @@ export const MovieItem = ({ movies, handleFavouritesClick, favouriteComponent })
           {title}
 
           <Vote
-            onClick={() => handleFavouritesClick({ id, title, poster_path, vote_average })}
+            onClick={() => handleFavouritesClick({ id, title, poster_path, vote_average, genres })}
           >
             <FavouriteComponent size={25} isLiked={isLiked} />
           </Vote>
