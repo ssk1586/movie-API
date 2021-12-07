@@ -11,31 +11,31 @@ import {
     ComponentWrapper
 } from '../PopularMovie/PopularMovie.styled';
 
-import { deleteFavouriteMovie, getFevouriteMovies } from '../../redux/slices/favouriteMovies'
+import { getFavouriteMovies, deleteFavouriteMovie } from '../../redux/slices/favouriteMovies'
 
 
 
 function FavouriteFilms() {
-    
-    const favourite = useSelector(getFevouriteMovies);
+
+    const favourite = useSelector(getFavouriteMovies);
 
     const dispatch = useDispatch();
 
     const removeFavourite = (movie) => {
-        dispatch(deleteFavouriteMovie(movie))   
+        dispatch(deleteFavouriteMovie(movie))
     };
 
     return (
         <ComponentWrapper>
             <Title>FAVOURITE</Title>
             <ContentContainer>
-                
+
                 {favourite.length > 0 ? <MovieItem
                     movies={favourite}
                     handleFavouritesClick={removeFavourite}
                     favouriteComponent={RemoveFavouriteSpan}
-                /> : <ErrorEmpty/>}
-            </ContentContainer> 
+                /> : <ErrorEmpty />}
+            </ContentContainer>
         </ComponentWrapper>
     )
 }

@@ -2,11 +2,11 @@ import axios from 'axios';
 
 
 const API_KEY = 'a4999a28333d1147dbac0d104526337a';
-const BASE_URL ='https://api.themoviedb.org/3'
+const BASE_URL = 'https://api.themoviedb.org/3'
 export const IMG_API = 'https://image.tmdb.org/t/p/w1280';
 
 
-export async function fetchMovies(page = 1) {
+export async function fetchMovies(page) {
     const responce = await axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`);
     return await responce.data;
 };

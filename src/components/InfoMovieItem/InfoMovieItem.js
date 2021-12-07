@@ -25,11 +25,11 @@ export const InfoMovieItem = ({ selectedMovie, handleFavouritesClick }) => {
         <Background key={id} imgUrl={IMG_API + backdrop_path}>
             <MovieItem >
                 <MovieImg src={IMG_API + poster_path} alt={id} />
-            
+
                 <Description>
                     <Date>
                         {release_date}
-                    </Date>                
+                    </Date>
                     <Title>
                         {original_title}
                     </Title>
@@ -37,17 +37,17 @@ export const InfoMovieItem = ({ selectedMovie, handleFavouritesClick }) => {
                         {overview}
                     </About>
                     <Range>
-                        <Icons><BiTimeFive size={17}/><>{runtime} min</></Icons>
-                        <Icons><BsPeople size={18}/><>{popularity}</></Icons>
-                        <Icons><BiRadioCircleMarked size={22} style ={ {color: "red"}}/><>Imdb {vote_average}/10</></Icons>
+                        <Icons><BiTimeFive size={17} /><>{runtime} min</></Icons>
+                        <Icons><BsPeople size={18} /><>{popularity}</></Icons>
+                        <Icons><BiRadioCircleMarked size={22} style={{ color: "red" }} /><>Imdb {vote_average}/10</></Icons>
                     </Range>
-                    
+
                     <Button
                         onClick={() => handleFavouritesClick({ id, title, poster_path, vote_average })}  ><BsFillPlayFill size={25} />
                         <>ADD TO FAVOURITE</>
                     </Button>
                 </Description>
-                </MovieItem>    
+            </MovieItem>
         </Background>
     );
-};  
+};

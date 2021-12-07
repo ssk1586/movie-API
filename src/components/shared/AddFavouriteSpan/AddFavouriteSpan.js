@@ -1,13 +1,16 @@
 import React from 'react'
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 
 
-function AddFavouriteSpan() {
+function AddFavouriteSpan({ isLiked }) {
     return (
-        <>
-            <AiOutlineHeart size={20} style={ {color: 'red' }}/>
-		</>
+        <> {
+            isLiked ?
+                (<AiFillHeart size={20} style={{ color: 'red' }} />) :
+                <AiOutlineHeart size={20} style={{ color: 'red' }} />
+        }
+        </>
     )
 }
 

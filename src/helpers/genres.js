@@ -1,0 +1,1 @@
+export const serializeGenres = (genres) => genres.reduce((obj, item) => Object.assign(obj, { [item.id]: item.name }), {})

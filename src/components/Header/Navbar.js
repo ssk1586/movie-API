@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { useDispatch } from 'react-redux';
 
 import { SidebarData } from './SidebarData'
-import {fetchSearchMovie} from '../../services/movieApi';
+import { searchMovies } from '../../redux/slices/favouriteMovies'
 
 import {
     MenuItemWrapper,
@@ -16,8 +16,6 @@ import {
 } from './Navbar.styled';
 import logo from '../../assets/logo/tmovie.png';
 
-import { addMovie } from '../../redux/slices/favouriteMovies'
-
 
 
 function Navbar() {
@@ -30,16 +28,20 @@ function Navbar() {
         setSearchTerm(e.target.value);
     };
 
-    const handleOnSubmit = (e) => {
+    const loadFilms = (searchTerm) => {
+        dispatch(searchMovies(searchTerm))
+    }
+
+    const handleOnSubmit =  (e) => {
         e.preventDefault();
         
         if (searchTerm) {
-            fetchSearchMovie(searchTerm)
-                .then(data => dispatch(addMovie(data.results)))
+            loadFilms(searchTerm)
             setSearchTerm('')
         };    
     };
 
+   
     return (
         <MenuComponent>
             <Logo to = '/'>      

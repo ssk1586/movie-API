@@ -13,7 +13,7 @@ export const Red = styled(Link)`
 `;
 
 export const Description = styled.h3`
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,4 +45,12 @@ export const FavoriteItem = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const Genre = styled.div`
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    color: gray;
+    font-size: 12px;
 `;
