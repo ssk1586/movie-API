@@ -28,6 +28,7 @@ function PopularMovie() {
 
     const movies = useSelector(getAllMovies)
 
+    console.log(movies)
     const dispatch = useDispatch();
 
     const handleLoadMore = () => {

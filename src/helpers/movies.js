@@ -9,12 +9,12 @@ export const extractGenresForMovies = (genre_ids, genres) => {
 
 }
 
-export const serializeMovies = (genres, movies) => {
+export const serializeMovies = (genres, movies, favMoviesIds) => {
     return movies.map(movie => {
         return {
             ...movie,
             genres: extractGenresForMovies(movie.genre_ids, genres).slice(0,1),
-            isLiked: false,
+            isLiked: favMoviesIds.includes(movie.id),
         }
     })
 }

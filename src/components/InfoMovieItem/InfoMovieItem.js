@@ -17,9 +17,9 @@ import { BsFillPlayFill, BsPeople } from "react-icons/bs";
 import { BiTimeFive, BiRadioCircleMarked } from "react-icons/bi";
 
 
-export const InfoMovieItem = ({ selectedMovie, handleFavouritesClick }) => {
+export const InfoMovieItem = ({ selectedMovie, handleFavouritesClick, disabled }) => {
     const { poster_path, original_title, overview, id, backdrop_path,
-        release_date, runtime, vote_average, popularity, title } = selectedMovie;
+        release_date, runtime, vote_average, popularity, title} = selectedMovie;
 
     return (
         <Background key={id} imgUrl={IMG_API + backdrop_path}>
@@ -42,9 +42,9 @@ export const InfoMovieItem = ({ selectedMovie, handleFavouritesClick }) => {
                         <Icons><BiRadioCircleMarked size={22} style={{ color: "red" }} /><>Imdb {vote_average}/10</></Icons>
                     </Range>
 
-                    <Button
+                    <Button disabled={disabled}
                         onClick={() => handleFavouritesClick({ id, title, poster_path, vote_average })}  ><BsFillPlayFill size={25} />
-                        <>ADD TO FAVOURITE</>
+                        ADD TO FAVOURITE
                     </Button>
                 </Description>
             </MovieItem>

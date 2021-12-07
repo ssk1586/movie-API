@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serializeMovies } from "../../helpers/movies";
-import { fetchMovies, fetchGenreMovieList, fetchSearchMovie, fetchMovieRecommendation  } from '../../services/movieApi';
+import { fetchMovies, fetchGenreMovieList, fetchSearchMovie, fetchMovieRecommendation, fetchMovieInformation  } from '../../services/movieApi';
 import { serializeGenres } from '../../helpers/genres'
 
 
@@ -62,10 +62,11 @@ export const searchMovies = createAsyncThunk(
     "movies/searchMovies",
     async (serachTerm, { getState }) => {
 
-        const { genres } = getState().movies;
+        const { genres, favouriteMovies } = getState().movies;
         try {
             const movies = await fetchSearchMovie(serachTerm);
-            return serializeMovies(genres, movies.results)
+            const favMoviesIds = favouriteMovies.map(movie => movie.id)
+            return serializeMovies(genres, movies.results, favMoviesIds)
         }
         catch (error) {
             console.log('error')
@@ -76,16 +77,20 @@ export const searchMovies = createAsyncThunk(
 export const recommendation = createAsyncThunk(
     "movies/recommendation",
     async (id, { getState }) => {
-        const { genres } = getState().movies;
+        const { genres, favouriteMovies } = getState().movies;
         try {
             const movies = await fetchMovieRecommendation(id);
-            return serializeMovies(genres, movies.results)
+            const favMoviesIds = favouriteMovies.map(movie => movie.id)
+            return serializeMovies(genres, movies.results, favMoviesIds)
         }
         catch (error) {
             console.log('error')
         };
     }
 )
+
+
+
 
 const movieSlice = createSlice({
     name: 'movies',
@@ -135,7 +140,7 @@ const movieSlice = createSlice({
             state.AllMovies = action.payload
         })
         builder.addCase(recommendation.fulfilled, (state, action) => {
-            state.recomMovies = action.payload
+            state.AllMovies = action.payload
         })
     },
 });
@@ -144,6 +149,6 @@ const movieSlice = createSlice({
 export const { addFavouriteMovie, deleteFavouriteMovie, increasePage, addMovie, resetPagination } = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.AllMovies
 export const getFavouriteMovies = (state) => state.movies.favouriteMovies
-export const getRecomMovies = (state) => state.movies.recomMovies
+export const getRecomMovies = (state) => state.movies.AllMovies
 export default movieSlice.reducer;
 

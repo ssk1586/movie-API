@@ -47,17 +47,21 @@ export const Range = styled.div`
     gap: 30px;
 `;
 
-export const Button = styled.div`
-    padding: 10px 20px;
+export const Button = styled.button`
+    padding: 8px 15px;
     background-color: #FF2626;
-    max-width: 185px;
+    max-width: 260px;
     text-decoration: none;
     color: #ffff;
-    border-radius: 20px;
+    border-radius: 13px;
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 5px;
     cursor: pointer;
+    /* border: none; */
+
+    
 `;
 export const Icons = styled.div`
     display: flex;

@@ -3,7 +3,12 @@ import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchMovieInformation } from '../../services/movieApi';
-import { addFavouriteMovie, recommendation, getRecomMovies } from '../../redux/slices/favouriteMovies'
+import {
+    addFavouriteMovie,
+    recommendation,
+    getRecomMovies,
+    getFavouriteMovies,
+} from '../../redux/slices/favouriteMovies'
 
 import { MovieItem } from '../MovieItem/MovieItem';
 import { InfoMovieItem } from '../InfoMovieItem/InfoMovieItem';
@@ -15,7 +20,9 @@ import { Title } from '../PopularMovie/PopularMovie.styled'
 
 function InfoMovie() {
     const [selectedMovie, setSelectedMovie] = useState({})
-    const recomM = useSelector(getRecomMovies)
+    const recomMovies = useSelector(getRecomMovies).slice(0,20)
+    const favMovies = useSelector(getFavouriteMovies)
+    const [disabled, setDisabled] = useState(false)
 
     const dispatch = useDispatch();
     const params = useParams(getRecomMovies);
@@ -24,25 +31,28 @@ function InfoMovie() {
         fetchMovieInformation(params.id)
             .then(data => setSelectedMovie(data))
         dispatch(recommendation(params.id))
-    }, [params.id])
 
-    const save = (movie) => {
+      
+    }, [params.id, dispatch])
+
+    const addFavourite = (movie) => {
         dispatch(addFavouriteMovie(movie))
-    }
-
-
+        setDisabled(true)
+    };
+   
     return (
         <ContentWrapper>
             <InfoMovieItem
                 selectedMovie={selectedMovie}
-                handleFavouritesClick={save}
+                handleFavouritesClick={addFavourite}
+                disabled={disabled}
             />
 
             <RecomMovieWrapper>
                 <Title>RECOMMENDATION</Title>
                 <MovieItem
-                    movies={recomM}
-                    handleFavouritesClick={save}
+                    movies={recomMovies}
+                    handleFavouritesClick={addFavourite}
                     favouriteComponent={AddFavouriteSpan}
                 />
             </RecomMovieWrapper>
