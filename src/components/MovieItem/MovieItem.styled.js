@@ -8,7 +8,7 @@ export const FilmItem = styled.div`
     border-radius: 10px;
 `;
 
-export const Red = styled(Link)`
+export const ImgWrapper = styled(Link)`
 
 `;
 

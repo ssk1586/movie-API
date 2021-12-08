@@ -9,7 +9,6 @@ export const MovieItem = styled.div`
 `;
 
 export const Background = styled.div`
-    /* background: url(${(props) => props.imgUrl}); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -49,7 +48,8 @@ export const Range = styled.div`
 
 export const Button = styled.button`
     padding: 8px 15px;
-    background-color: #FF2626;
+    
+    background-color:  ${props => props.color};
     max-width: 260px;
     text-decoration: none;
     color: #ffff;
@@ -59,10 +59,9 @@ export const Button = styled.button`
     justify-content: center;
     gap: 5px;
     cursor: pointer;
-    /* border: none; */
-
-    
+    border: none;
 `;
+
 export const Icons = styled.div`
     display: flex;
     gap: 10px;

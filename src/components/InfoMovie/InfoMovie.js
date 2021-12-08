@@ -32,6 +32,9 @@ function InfoMovie() {
             .then(data => setSelectedMovie(data))
         dispatch(recommendation(params.id))
 
+        if (movieExists(favMovies, params.id)) {
+            setDisabled(true)
+        }
       
     }, [params.id, dispatch])
 
@@ -39,6 +42,13 @@ function InfoMovie() {
         dispatch(addFavouriteMovie(movie))
         setDisabled(true)
     };
+
+    
+function movieExists(movie, id) {
+    return movie.some((foundMovis) => {
+        return foundMovis.id == id;
+    });
+}
    
     return (
         <ContentWrapper>

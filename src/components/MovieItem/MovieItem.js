@@ -7,23 +7,24 @@ import {
   FilmComponent,
   Vote,
   FavoriteItem,
-  Red,
+  ImgWrapper,
   Genre
 } from './MovieItem.styled';
+
 import { Badge } from '@material-ui/core';
 
 
 export const MovieItem = ({ movies, handleFavouritesClick, favouriteComponent }) => {
 
-
   const listContent = movies.map(({ id, title, poster_path, vote_average, genres, isLiked }) => {
+
     const FavouriteComponent = favouriteComponent;
 
     return (
       <FilmItem key={id}>
-        <Red to={`/infoMovie/${id}`}>
+        <ImgWrapper to={`/infoMovie/${id}`}>
           <MovieImg src={IMG_API + poster_path} alt={title} />
-        </Red>
+        </ImgWrapper>
         <FavoriteItem>
           <Badge badgeContent={vote_average} color={vote_average > 6 ? 'primary' : 'secondary'} />
         </FavoriteItem>

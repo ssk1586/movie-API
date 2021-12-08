@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serializeMovies } from "../../helpers/movies";
-import { fetchMovies, fetchGenreMovieList, fetchSearchMovie, fetchMovieRecommendation, fetchMovieInformation  } from '../../services/movieApi';
+import { fetchMovies, fetchGenreMovieList, fetchSearchMovie, fetchMovieRecommendation } from '../../services/movieApi';
 import { serializeGenres } from '../../helpers/genres'
 
 
@@ -88,9 +88,6 @@ export const recommendation = createAsyncThunk(
         };
     }
 )
-
-
-
 
 const movieSlice = createSlice({
     name: 'movies',
