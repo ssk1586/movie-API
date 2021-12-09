@@ -27,6 +27,12 @@ function InfoMovie() {
     const dispatch = useDispatch();
     const params = useParams(getRecomMovies);
 
+    const addFavourite = (movie) => {
+        dispatch(addFavouriteMovie(movie))
+        setDisabled(true)
+    };
+
+
     useEffect(() => {
         fetchMovieInformation(params.id)
             .then(data => setSelectedMovie(data))
@@ -34,20 +40,18 @@ function InfoMovie() {
 
         if (movieExists(favMovies, params.id)) {
             setDisabled(true)
+        } else {
+            setDisabled(false)
         }
-      
-    }, [params.id, dispatch])
+    }, [params.id, movieExists])
 
-    const addFavourite = (movie) => {
-        dispatch(addFavouriteMovie(movie))
-        setDisabled(true)
-    };
 
     
 function movieExists(movie, id) {
     return movie.some((foundMovis) => {
         return foundMovis.id == id;
-    });
+    }
+);
 }
    
     return (

@@ -43,9 +43,9 @@ export const InfoMovieItem = ({ selectedMovie, handleFavouritesClick, disabled }
                         <Icons><BiRadioCircleMarked size={22} style={{ color: "red" }} /><>Imdb {vote_average}/10</></Icons>
                     </Range>
 
-                    <Button disabled={disabled} color = {disabled ? 'gray' : '#FF2626'}
+                    <Button color = {disabled ? 'gray' : '#FF2626'}
                         onClick={() => handleFavouritesClick({ id, title, poster_path, vote_average })}  ><BsFillPlayFill size={25} />
-                        ADD TO FAVOURITE
+                        { disabled ? 'ADDED' : 'ADD TO FAVOURITE'}
                     </Button>
                 </Description>
             </MovieItem>

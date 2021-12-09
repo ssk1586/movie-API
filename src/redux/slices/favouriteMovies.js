@@ -107,6 +107,8 @@ const movieSlice = createSlice({
                     else return movie
                 })
                 state.favouriteMovies.push(payload)
+            } else {
+                movieSlice.caseReducers.deleteFavouriteMovie(state, { payload })
             }
         },
         deleteFavouriteMovie: (state, { payload }) => {
@@ -114,7 +116,7 @@ const movieSlice = createSlice({
                 if (movie.id === payload.id) {
                     return {
                         ...movie,
-                        isLiked: true,
+                        isLiked: false,
                     }
                 }
                 else return movie
