@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ import { Title } from '../PopularMovie/PopularMovie.styled'
 
 function InfoMovie() {
     const [selectedMovie, setSelectedMovie] = useState({})
-    const recomMovies = useSelector(getRecomMovies).slice(0,20)
+    const recomMovies = useSelector(getRecomMovies).slice(0, 20)
     const favMovies = useSelector(getFavouriteMovies)
     const [disabled, setDisabled] = useState(false)
 
@@ -32,27 +32,28 @@ function InfoMovie() {
         setDisabled(true)
     };
 
-
     useEffect(() => {
         fetchMovieInformation(params.id)
             .then(data => setSelectedMovie(data))
         dispatch(recommendation(params.id))
 
+        
+    }, [params.id])
+
+
+    useEffect(() => {
         if (movieExists(favMovies, params.id)) {
             setDisabled(true)
         } else {
             setDisabled(false)
         }
-    }, [params.id, movieExists])
+    })
 
-
-    
-function movieExists(movie, id) {
-    return movie.some((foundMovis) => {
-        return foundMovis.id == id;
-    }
-);
-}
+    function movieExists(movie, id) {
+        return movie.some((foundMovis) => {
+            return foundMovis.id == id;
+        }
+    );}
    
     return (
         <ContentWrapper>
